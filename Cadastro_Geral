@@ -24,7 +24,24 @@ insert into Cadastro_Cliente set Id = '4', Nome_Completo = 'Maria santana', Emai
 
 create table if not exists Localidade_Cadastro(
 Id tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+Codigos_Municipal int not null,
 Cidade varchar(50) not null,
 Uf_Estado varchar(2),
+primary key(Id, Codigos_Municipal)
+)engine=InnoDB default charset=utf8 auto_increment=255;
 
-);
+alter table Localidade_Cadastro add column Endereço varchar(20);
+alter table Localidade_Cadastro add column Num int(4) not null;
+alter table Localidade_Cadastro add column Nacionalidade varchar(20) default '';
+
+
+select * from Localidade_Cadastro;
+
+alter table Localidade_Cadastro modify column Endereço varchar(20) after Codigos_Municipal;
+alter table Localidade_Cadastro modify column Num int(4) not null after Endereço;
+alter table Localidade_Cadastro modify column Codigos_Municipal int not null after Uf_Estado;
+
+insert into Localidade_Cadastro(Id, Endereço, Num, Cidade, Uf_Estado, Codigos_Municipal, Nacionalidade) values ('1', 'R.Joaquim Nabuco', '66', 'adamantina', 'sp', '3500105', 'Brasil');
+insert into Localidade_Cadastro(Id, Endereço, Num, Cidade, Uf_Estado, Codigos_Municipal, Nacionalidade) values ('2', 'Brookklyn Ave', '144', 'Nova York', 'EUA', '1347', 'EUA');
+insert into Localidade_Cadastro(Id, Endereço, Num, Cidade, Uf_Estado, Codigos_Municipal, Nacionalidade) values ('3', 'Dundas.st.w', '150', 'toronto', 'atm', '1416', 'Canadá');
+
